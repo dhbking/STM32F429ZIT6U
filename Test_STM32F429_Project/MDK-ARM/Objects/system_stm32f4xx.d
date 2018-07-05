@@ -1,0 +1,30 @@
+.\objects\system_stm32f4xx.o: ..\Src\system_stm32f4xx.c
+.\objects\system_stm32f4xx.o: ..\Inc\stm32f4xx.h
+.\objects\system_stm32f4xx.o: ..\Inc\stm32f429xx.h
+.\objects\system_stm32f4xx.o: ..\Driver\CMSIS\core_cm4.h
+.\objects\system_stm32f4xx.o: E:\Program Files (x86)\MDK\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\system_stm32f4xx.o: ..\Driver\CMSIS\core_cmInstr.h
+.\objects\system_stm32f4xx.o: ..\Driver\CMSIS\cmsis_armcc.h
+.\objects\system_stm32f4xx.o: ..\Driver\CMSIS\core_cmFunc.h
+.\objects\system_stm32f4xx.o: ..\Driver\CMSIS\core_cmSimd.h
+.\objects\system_stm32f4xx.o: ..\Inc\system_stm32f4xx.h
+.\objects\system_stm32f4xx.o: ..\Driver\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h
+.\objects\system_stm32f4xx.o: ..\Inc\stm32f4xx_hal_conf.h
+.\objects\system_stm32f4xx.o: ..\Driver\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h
+.\objects\system_stm32f4xx.o: ..\Driver\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h
+.\objects\system_stm32f4xx.o: ..\Inc\stm32f4xx.h
+.\objects\system_stm32f4xx.o: ..\Driver\STM32F4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h
+.\objects\system_stm32f4xx.o: E:\Program Files (x86)\MDK\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\system_stm32f4xx.o: ..\Driver\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h
+.\objects\system_stm32f4xx.o: ..\Driver\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h
+.\objects\system_stm32f4xx.o: ..\Driver\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio_ex.h
+.\objects\system_stm32f4xx.o: ..\Driver\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h
+.\objects\system_stm32f4xx.o: ..\Driver\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma_ex.h
+.\objects\system_stm32f4xx.o: ..\Driver\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h
+.\objects\system_stm32f4xx.o: ..\Driver\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_adc.h
+.\objects\system_stm32f4xx.o: ..\Driver\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_adc_ex.h
+.\objects\system_stm32f4xx.o: ..\Driver\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h
+.\objects\system_stm32f4xx.o: ..\Driver\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h
+.\objects\system_stm32f4xx.o: ..\Driver\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ramfunc.h
+.\objects\system_stm32f4xx.o: ..\Driver\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h
+.\objects\system_stm32f4xx.o: ..\Driver\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h
