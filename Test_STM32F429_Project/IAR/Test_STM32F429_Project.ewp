@@ -2137,6 +2137,9 @@
   <group>
     <name>Src</name>
     <file>
+      <name>$PROJ_DIR$\..\Src\led.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\Src\main.c</name>
     </file>
     <file>
