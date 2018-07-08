@@ -84,12 +84,7 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
-    /* Insert delay 100 ms */
-    HAL_Delay(1000);
-    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
-    /* Insert delay 100 ms */
-    HAL_Delay(1000);
+	Led_Show();
   }
 }
 
