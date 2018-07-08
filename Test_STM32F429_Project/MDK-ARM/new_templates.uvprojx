@@ -759,6 +759,11 @@
               <FileType>1</FileType>
               <FilePath>..\Src\led.c</FilePath>
             </File>
+            <File>
+              <FileName>key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\key.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
