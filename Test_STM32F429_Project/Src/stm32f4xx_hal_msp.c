@@ -76,6 +76,7 @@
 void HAL_MspInit(void)
 {
 	Led_Init();
+	Key_Init();
 }
 
 /**

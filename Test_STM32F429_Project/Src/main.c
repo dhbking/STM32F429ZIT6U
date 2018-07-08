@@ -63,7 +63,7 @@ static void Error_Handler(void);
   */
 int main(void)
 {
-
+  uint8_t flag = 0;
   /* STM32F4xx HAL library initialization:
   - Configure the Flash prefetch and Buffer caches
   - Systick timer is configured by default as source of time base, but user 
@@ -83,8 +83,12 @@ int main(void)
   
   /* Infinite loop */
   while (1)
-  {
-	Led_Show();
+  {  
+	if(KEY == ON || flag == 1)
+	{
+		flag = 1;
+		Led_Show();
+	}
   }
 }
 

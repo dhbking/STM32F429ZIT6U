@@ -9,9 +9,18 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=1720753316
+Checksum=1774128601
 [CodeCoverage]
 Enabled=_ 0
+[Exceptions]
+StopOnUncaught=_ 0
+StopOnThrow=_ 0
+[CallStack]
+ShowArgs=0
+[Disassembly]
+MixedMode=1
+[StLinkDriver]
+CStepIntDis=_ 0
 [DriverProfiling]
 Enabled=0
 Mode=1
@@ -21,21 +30,14 @@ Exclusions=
 [CallStackLog]
 Enabled=0
 [CallStackStripe]
-ShowTiming=96
+ShowTiming=1
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
 Category=_ 0
-[Exceptions]
-StopOnUncaught=_ 0
-StopOnThrow=_ 0
 [TermIOLog]
 LoggingEnabled=_ 0
 LogFile=_ ""
-[CallStack]
-ShowArgs=0
-[Disassembly]
-MixedMode=1
 [InterruptLog]
 LogEnabled=0
 GraphEnabled=0
