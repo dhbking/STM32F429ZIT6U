@@ -55,6 +55,13 @@ static void SystemClock_Config(void);
 static void Error_Handler(void);
 
 /* Private functions ---------------------------------------------------------*/
+#ifdef __GNUC__
+/* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
+   set to 'Yes') calls __io_putchar() */
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#else
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#endif /* __GNUC__ */
 
 /**
   * @brief  Main program
@@ -64,6 +71,8 @@ static void Error_Handler(void);
 int main(void)
 {
   uint8_t flag = 0;
+  uint8_t len = 0;
+  uint16_t times = 0;
   /* STM32F4xx HAL library initialization:
   - Configure the Flash prefetch and Buffer caches
   - Systick timer is configured by default as source of time base, but user 
@@ -80,7 +89,8 @@ int main(void)
 
   /* Add your application code here
      */
-  
+  printf("\n\r UART Printf Example: retarget the C library printf function to the UART\n\r");
+  printf("** Test finished successfully. ** \n\r");
   /* Infinite loop */
   while (1)
   {  
@@ -89,7 +99,44 @@ int main(void)
 		flag = 1;
 		Led_Show();
 	}
+	
+//	if(USART_RX_STA&0x8000)
+//	{					   
+//		len=USART_RX_STA&0x3fff;//得到此次接收到的数据长度
+//		printf("\r\n您发送的消息为:\r\n");
+//		HAL_UART_Transmit(&UART2_Handler,(uint8_t*)USART_RX_BUF,len,1000);	//发送接收到的数据
+//		while(__HAL_UART_GET_FLAG(&UART2_Handler,UART_FLAG_TC)!=SET);		//等待发送结束
+//		printf("\r\n\r\n");//插入换行
+//		USART_RX_STA=0;
+//	}else
+//	{
+//		times++;
+//		if(times%5000==0)
+//		{
+//			printf("\r\nALIENTEK 阿波罗STM32F429开发板 串口实验\r\n");
+//			printf("正点原子@ALIENTEK\r\n\r\n\r\n");
+//		}
+//		if(times%200==0)
+//			printf("请输入数据,以回车键结束\r\n");  
+//		if(times%30==0)
+//			HAL_GPIO_TogglePin(LED_GREEN_GPIO, LED_GREEN_PIN);//闪烁LED,提示系统正在运行.
+//		HAL_Delay(10);   
+//	}
   }
+}
+
+/**
+  * @brief  Retargets the C library printf function to the USART.
+  * @param  None
+  * @retval None
+  */
+PUTCHAR_PROTOTYPE
+{
+  /* Place your implementation of fputc here */
+  /* e.g. write a character to the USART3 and Loop until the end of transmission */
+  HAL_UART_Transmit(&UART3_Handler, (uint8_t *)&ch, 1, 0xFFFF);
+
+  return ch;
 }
 
 /**
@@ -112,6 +159,7 @@ int main(void)
   * @param  None
   * @retval None
   */
+#if 0
 static void SystemClock_Config(void)
 {
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
@@ -159,6 +207,70 @@ static void SystemClock_Config(void)
     Error_Handler();
   }
 }
+
+#else
+
+void SystemClock_Config(void)
+{
+
+  RCC_OscInitTypeDef RCC_OscInitStruct;
+  RCC_ClkInitTypeDef RCC_ClkInitStruct;
+
+    /**Configure the main internal regulator output voltage 
+    */
+  __HAL_RCC_PWR_CLK_ENABLE();
+
+  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+
+    /**Initializes the CPU, AHB and APB busses clocks 
+    */
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  RCC_OscInitStruct.HSICalibrationValue = 16;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+  RCC_OscInitStruct.PLL.PLLM = 8;
+  RCC_OscInitStruct.PLL.PLLN = 180;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+  RCC_OscInitStruct.PLL.PLLQ = 4;
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+    /**Activate the Over-Drive mode 
+    */
+  if (HAL_PWREx_EnableOverDrive() != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+    /**Initializes the CPU, AHB and APB busses clocks 
+    */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+    /**Configure the Systick interrupt time 
+    */
+  HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
+
+    /**Configure the Systick 
+    */
+  HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
+
+  /* SysTick_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
+}
+#endif
 
 /**
   * @brief  This function is executed in case of error occurrence.

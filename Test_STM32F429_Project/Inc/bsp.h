@@ -3,5 +3,6 @@
 
 #include "Led.h"
 #include "key.h"
+#include "usart.h"
 
 #endif

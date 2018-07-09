@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Templates/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    06-May-2016
   * @brief   HAL MSP module.
   *         
   @verbatim
@@ -18,7 +16,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -77,6 +75,37 @@ void HAL_MspInit(void)
 {
 	Led_Init();
 	Key_Init();
+	Uart_Init(115200);
+}
+
+void HAL_UART_MspInit(UART_HandleTypeDef *huart)
+{
+  GPIO_InitTypeDef  GPIO_InitStruct;
+
+
+  /*##-1- Enable peripherals and GPIO Clocks #################################*/
+  /* Enable GPIO TX/RX clock */
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+
+
+  /* Enable USARTx clock */
+  __HAL_RCC_USART3_CLK_ENABLE();
+
+  /*##-2- Configure peripheral GPIO ##########################################*/
+  /* UART TX GPIO pin configuration  */
+  GPIO_InitStruct.Pin       = GPIO_PIN_8;
+  GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull      = GPIO_PULLUP;
+  GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_InitStruct.Alternate = GPIO_AF7_USART3;
+
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+  /* UART RX GPIO pin configuration  */
+  GPIO_InitStruct.Pin = GPIO_PIN_9;
+  GPIO_InitStruct.Alternate = GPIO_AF7_USART3;
+
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 }
 
 /**
